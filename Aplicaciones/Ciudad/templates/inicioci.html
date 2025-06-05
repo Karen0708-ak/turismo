@@ -26,7 +26,7 @@
                 <td>{{ciudadTemporal.clima}}</td>
                 <td>{{ciudadTemporal.poblacion}}</td>
                 <td>
-                    {% for lugar in ciudadTemporal.lugares.all %}
+                    {% for lugares in ciudadTemporal.lugares.all %}
                         {{ lugares.nombre }}{% if not forloop.last %}, {% endif %}
                     {% empty %}
                         No hay ciudad

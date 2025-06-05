@@ -8,7 +8,8 @@ def inicio(request):
     listadoCiudad=Ciudad.objects.all()
     return render(request,"inicioci.html",{'ciudad':listadoCiudad})
 def nuevaCiudad(request):
-    return render(request,"nuevaCiudad.html")
+    rlugares=Lugares.objects.all()
+    return render(request,"nuevaCiudad.html",{'lugares':rlugares})
 #Almacenando los datos de cargo en la Bdd
 def guardarCiudad(request):
     nombre=request.POST["nombre"]
@@ -70,7 +71,7 @@ def procesarEdicionCiudad(request):
     ciudad.save()
     ciudad.lugares.clear()
     for id in lugares_ids:
-            lugares = Lugares.objects.get(id_jugador=id)
+            lugares = Lugares.objects.get(id=id)
             ciudad.lugares.add(lugares)
 
     #mensaje de confirmacion
