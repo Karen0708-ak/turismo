@@ -24,8 +24,35 @@
                 <td>{{ciudadTemporal.nombre}}</td>
                 <td>{{ciudadTemporal.clima}}</td>
                 <td>{{ciudadTemporal.poblacion}}</td>
-                <td>{{ciudadTemporal.foto}}</td>
-                <td>{{ciudadTemporal.folleto}}</td>
+                <td>
+                    {% if ciudadTemporal.foto %}
+                        <img src="{{ciudadTemporal.foto.url}}" alt="" height="80px">
+                    {% else %}
+                        Ninguna
+                    {% endif %}
+                </td>
+                <td>
+                    {% if ciudadTemporal.folleto %}
+                        
+                        <!-- Ver el PDF directamente en la tabla -->
+                        <iframe 
+                            src="{{ ciudadTemporal.folleto.url }} " 
+                            width="300" 
+                            height="250"
+                            style="border: 1px solid #ddd; background: #f8f9fa;"
+                            title="Vista previa del documento"
+                            type="application/pdf">
+                        </iframe>
+                        <br>
+                        <br>
+                        <p>{{ ciudadTemporal.folleto.name|slice:"7:" }}</p>
+                        <br>
+                        <a href="{{ ciudadTemporal.folleto.url }}" download class="btn btn-sm btn-primary">Descargar</a>
+                        <a href="{{ ciudadTemporal.folleto.url }}" target="_blank" class="btn btn-sm btn-secondary">Ver en pestaña</a>
+                    {% else %}
+                        Ninguna
+                    {% endif %}
+                </td>
                 <td>
                     <a href="editarCiudad/{{ciudadTemporal.id}}" class="btn btn-outline-warning">
                         <i class="fa fa-pen"></i>
@@ -57,7 +84,7 @@
     </tbody>
 </table>
 <div class="text-center">
-    <a href="nuevoCiudad" class="btn btn-primary " >
+    <a href="nuevaCiudad" class="btn btn-primary " >
         Agregar Ciudad
     </a>
 </div>

@@ -1,0 +1,46 @@
+{% extends 'plantilla.html' %}
+{% load static %}
+{% block body %}
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 bg-light">
+        <h1>Nueva Ciudad</h1>
+        <form action="guardarCiudad" method="post">
+            {% csrf_token %}
+            
+            <label for="nombre">Nombre(*)</label><br>
+            <input class="form-control" type="text" name="nombre" id="nombre" required><br>
+
+            <label for="clima">Clima(*)</label><br>
+            <select class="form-control" name="clima" id="clima">
+                <option value="templado">Templeado</option>
+                <option value="tropical">Tropical</option>
+            </select><br>
+
+            <label for="poblacion">Población(*)</label><br>
+            <input class="form-control" type="number" name="poblacion" id="poblacion" required><br>
+
+            <label for="">Foto</label>
+            <input type="file" name="foto" id="foto" class="form-control">
+
+            <br>
+            <label for="">Folleto(PDF)*</label>
+            <input class="form-control" type="file" name="folleto" id="folleto" >
+            <br>
+
+            <button class="btn btn-success" type="submit">Guardar</button>
+            <a class="btn btn-outline-danger" href="{% url 'inicioci' %}">Cancelar</a><br><br>
+        </form>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+<script>
+    $("#foto").fileinput({
+            //language: "es",
+            allowedFileExtensions: ["png|jpg|jpeg"],
+            showCaption: false,
+            dropZoneEnabled: true,
+            showClose: false
+    });
+</script>
+{% endblock %}
