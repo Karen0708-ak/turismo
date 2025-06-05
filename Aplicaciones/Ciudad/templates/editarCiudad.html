@@ -5,7 +5,7 @@
     <div class="col-md-3"></div>
     <div class="col-md-6 bg-light">
         <h1>Editar Ciudad Ciudad</h1>
-        <form action="/procesarEdicionCiudad" method="post" enctype="multipart/form-data">
+        <form action="/procesarEdicionCiudad" method="post" enctype="multipart/form-data"id="frm_nueva_ciudad">
             {% csrf_token %}
             <input type="hidden" name="id" value="{{ciudadEditar.id}}">
             <label for="nombre">Nombre(*)</label><br>
@@ -62,9 +62,74 @@
     <div class="col-md-3"></div>
 </div>
 <script>
+    $("#frm_nueva_ciudad").validate({
+        rules:{
+            "nombre":{
+                required:true,
+                minlength:5,// cuenta caracteres 
+                maxlength:20// caracteres maximos
+            },
+            "clima":{
+                required:true,
+
+            },
+            "poblacion":{
+                required:true,
+                min:15000,// cuenta caracteres 
+                max:50000000// caracteres maximos
+            },
+            "lugares":{
+                required:true
+            },
+            "foto":function() {
+                        // Solo es requerido si no hay archivo ya cargado
+                        return "{{ ciudadEditar.foto|default:'' }}" === "";
+            },
+            "folleto":function() {
+                        // Solo es requerido si no hay archivo ya cargado
+                        return "{{ ciudadEditar.folleto|default:'' }}" === "";
+            }
+
+        },
+        messages:{
+            "nombre":{
+                required:"Por favor el Campo es obligatorio",
+                minlength:"Ingresar minimo 4 caracteres",// cuenta caracteres 
+                maxlength:"Ingresar maxima 20 caracteres"// caracteres maximos
+            },
+            "clima":{
+                required:"Por favor el Campo es obligatorio,seleccione un clima",
+            },
+            "poblacion":{
+                required:"Por favor el Campo es obligatorio",
+                min:"El minimo de la poblacion puede ser 15000",// cuenta caracteres 
+                max:"El maximo de la poblacion puede ser 50000000",// caracteres maximos
+            },
+            "lugares":{
+                required:"Por favor el Campo es obligatorio,seleccione al menos un lugar"
+            },
+            "foto":{
+                required:"Campo obligatorio por favor agregue una foto"
+            },
+            "folleto":{
+                required:"Campo obligatorio por favor ingrese un pdf"
+            }
+        }
+    });
+</script>
+<script>
     $("#foto").fileinput({
-            //language: "es",
+            language: "es",
             allowedFileExtensions: ["png|jpg|jpeg"],
+            showCaption: false,
+            dropZoneEnabled: true,
+            showClose: false
+    });
+</script>
+<script>
+    $("#folleto").fileinput({
+            language: "es",
+            allowedFileExtensions: ["pdf"],
             showCaption: false,
             dropZoneEnabled: true,
             showClose: false

@@ -3,9 +3,14 @@
 {% block body %}
 <br>
 <h1 class="text-center">Listado de ciudades</h1>
-
 <hr>
-<table class="table table-bordered table-striped table-hover ">
+<div class="text-right">
+    <a href="nuevaCiudad" class="btn btn-primary " >
+        Agregar Ciudad
+    </a>
+</div>
+<br>
+<table class="table table-bordered table-striped table-hover" id="tbl_ciudades">
     <thead>
         <tr class="table-success text-center">
             <th>ID</th>
@@ -91,11 +96,23 @@
         {% endfor %}
     </tbody>
 </table>
-<div class="text-center">
-    <a href="nuevaCiudad" class="btn btn-primary " >
-        Agregar Ciudad
-    </a>
-</div>
+<script>
+    $(document).ready(function() {
+        let table = new DataTable('#tbl_ciudades', {
+            language: {
+                url: 'https://cdn.datatables.net/plug-ins/2.3.1/i18n/es-ES.json'
+            },
+            dom: 'Bfrtip', 
+            buttons: [
+                'copy',
+                'csv',
+                'excel',
+                'pdf',
+                'print'
+            ]
+        });
+    });
+</script>
 <br>
 <br>
 {% endblock %}

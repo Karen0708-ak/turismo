@@ -1,11 +1,18 @@
 {% extends 'plantilla.html' %}
 {% load static %}
 {% block body %}
-<h1>Listado de Lugares</h1>
-
-<table class="table table-bordered table-striped table-hover ">
+<br>
+<h1 class="text-center">Listado de Lugares</h1>
+<hr>
+<div class="text-right">
+    <a href="nuevoLugar" class="btn btn-primary">
+        Agregar Lugar
+    </a>
+</div>
+<br>
+<table class="table table-bordered table-striped table-hover " id="tbl_lugares">
     <thead>
-        <tr>
+        <tr class="table-success text-center">
             <th>ID</th>
             <th>NOMBRE</th>
             <th>DIRECCIÓN</th>
@@ -43,7 +50,7 @@
                         </iframe>
                         <br>
                         <br>
-                        <p>{{ lugarTemporal.historia.name|slice:"7:" }}</p>
+                        <p>{{ lugarTemporal.historia.name|slice:"8:" }}</p>
                         <br>
                         <a href="{{ lugarTemporal.historia.url }}" target="_blank" class="btn btn-sm btn-secondary">Ver en pestaña</a>
                         <a href="{{ lugarTemporal.historia.url }}" download class="btn btn-sm btn-primary">Descargar</a>
@@ -83,11 +90,24 @@
         {% endfor %}
     </tbody>
 </table>
-<div class="text-center">
-    <a href="nuevoLugar" class="btn btn-primary">
-        Agregar Lugar
-    </a>
-</div>
+
+<script>
+    $(document).ready(function() {
+        let table = new DataTable('#tbl_lugares', {
+            language: {
+                url: 'https://cdn.datatables.net/plug-ins/2.3.1/i18n/es-ES.json'
+            },
+            dom: 'Bfrtip', 
+            buttons: [
+                'copy',
+                'csv',
+                'excel',
+                'pdf',
+                'print'
+            ]
+        });
+    });
+</script>
 <br>
 <br>
 {% endblock %}
