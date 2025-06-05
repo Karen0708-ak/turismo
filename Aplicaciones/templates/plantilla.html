@@ -47,11 +47,8 @@
   </nav>
 
   {% block contenido %}
-  <div class="container">
-    <div class="hero-wrap js-fullheight" style="background-image: url('images/bg_1.jpg');">
-      <div class="overlay"></div>
+  <div class="hero-wrap js-fullheight" style="background-image: url('/static/plantilla/tur/images/bg_1.jpg');">
     </div>
-  </div>
   {% endblock %}
 
   <footer class="ftco-footer ftco-bg-dark ftco-section">
@@ -126,7 +123,6 @@
     </svg>
   </div>
 
-  <!-- Scripts con {% static %} -->
   <script src="{% static 'plantilla/tur/js/jquery.min.js' %}"></script>
   <script src="{% static 'plantilla/tur/js/jquery-migrate-3.0.1.min.js' %}"></script>
   <script src="{% static 'plantilla/tur/js/popper.min.js' %}"></script>
