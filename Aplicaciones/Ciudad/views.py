@@ -23,3 +23,9 @@ def guardarCiudad(request):
     #mensaje de confirmacion
     messages.success(request,"Ciudad guardada exitosamente")
     return redirect('inicioci')
+def eliminarCiudad(request,id):
+    ciudadEliminar=Ciudad.objects.get(id=id)
+    ciudadEliminar.delete()
+    #mensaje de confirmacion
+    messages.success(request,"Ciudad ELIMINADO exitosamente")
+    return redirect('inicioci')
