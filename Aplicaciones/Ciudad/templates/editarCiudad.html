@@ -1,0 +1,62 @@
+{% extends 'plantilla.html' %}
+{% load static %}
+{% block body %}
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 bg-light">
+        <h1>Editar Ciudad Ciudad</h1>
+        <form action="/procesarEdicionCiudad" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="hidden" name="id" value="{{ciudadEditar.id}}">
+            <label for="nombre">Nombre(*)</label><br>
+            <input class="form-control" type="text" name="nombre" id="nombre" value="{{ciudadEditar.nombre}}" ><br>
+
+            <label for="clima">Clima(*)</label><br>
+            <select class="form-control" name="clima" id="clima">
+                <option value="Templado" {% if ciudadEditar.clima == "Templado" %}selected{% endif %}>Templado</option>
+                <option value="Tropical" {% if ciudadEditar.clima == "Tropical" %}selected{% endif %}>Tropical</option>
+            </select><br>
+
+            <label for="poblacion">Población(*)</label><br>
+            <input class="form-control" type="number" name="poblacion" id="poblacion" value="{{ciudadEditar.poblacion}}" ><br>
+
+            <label for="">Foto</label>
+            <br>
+            <input type="file" name="foto" id="foto" class="form-control">
+            {% if ciudadEditar.foto %}
+                <br>
+                <img src="{{ ciudadEditar.foto.url }}" alt="Foto actual" width="120">
+            {% endif %}
+            <br>
+            <br>
+            <label for="">Folleto(PDF)*</label>
+            <br>
+            <input type="file" name="folleto" id="folleto" class="form-control">
+            {% if ciudadEditar.folleto %}
+                <br>
+                <iframe 
+                    src="{{ ciudadEditar.folleto.url }}" 
+                    width="300" 
+                    height="200"
+                    style="border: 1px solid #ddd; background: #f8f9fa;"
+                    title="Vista previa del documento"
+                    type="application/pdf">
+                </iframe>
+            {% endif %}
+            <br>
+            <button class="btn btn-success" type="submit">Guardar</button>
+            <a class="btn btn-outline-danger" href="{% url 'inicioci' %}">Cancelar</a><br><br>
+        </form>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+<script>
+    $("#foto").fileinput({
+            //language: "es",
+            allowedFileExtensions: ["png|jpg|jpeg"],
+            showCaption: false,
+            dropZoneEnabled: true,
+            showClose: false
+    });
+</script>
+{% endblock %}

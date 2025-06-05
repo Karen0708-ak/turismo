@@ -5,4 +5,6 @@ urlpatterns=[
     path('nuevaCiudad',views.nuevaCiudad),
     path('guardarCiudad',views.guardarCiudad),
     path('eliminarCiudad/<id>',views.eliminarCiudad),
+    path('procesarEdicionCiudad',views.procesarEdicionCiudad),
+    path('editarCiudad/<id>',views.editarCiudad),
 ]
