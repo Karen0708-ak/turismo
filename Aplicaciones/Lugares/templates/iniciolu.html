@@ -1,0 +1,92 @@
+{% extends "./plantilla.html"%}
+{% block contenido %}
+<h1>Listado de Cargos</h1>
+
+<table class="table table-bordered table-striped table-hover" id="tbl_cargos">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>NOMBRE</th>
+            <th>DIRECCIÓN</th>
+            <th>RESEÑA</th>
+            <th>HORARIO</th>
+            <th>HISTORIA</th>
+            <th>ACCIONES</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for lugarTemporal in lugar %}
+            <tr>
+                <td>{{lugarTemporal.id}}</td>
+                <td>{{lugarTemporal.nombre}}</td>
+                <td>{{lugarTemporal.direccion}}</td>
+                <td>{{lugarTemporal.resena}}</td>
+                <td>
+                    {% if lugarTemporal.horario %}
+                        <img src="{{lugarTemporal.horario.url}}" alt="" height="80px">
+                    {% else %}
+                        Ninguna
+                    {% endif %}
+                </td>
+                <td>
+                    {% if lugarTemporal.historia %}
+                        
+                        <!-- Ver el PDF directamente en la tabla -->
+                        <iframe 
+                            src="{{ lugarTemporal.historia.url }} " 
+                            width="300" 
+                            height="250"
+                            style="border: 1px solid #ddd; background: #f8f9fa;"
+                            title="Vista previa del documento"
+                            type="application/pdf">
+                        </iframe>
+                        <br>
+                        <br>
+                        <p>{{ lugarTemporal.historia.name|slice:"7:" }}</p>
+                        <br>
+                        <a href="{{ lugarTemporal.historia.url }}" target="_blank" class="btn btn-sm btn-secondary">Ver en pestaña</a>
+                        <a href="{{ lugarTemporal.historia.url }}" download class="btn btn-sm btn-primary">Descargar</a>
+                    {% else %}
+                        Ninguna
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="editarLugares/{{lugarTemporal.id}}" class="btn btn-outline-warning">
+                        <i class="fa fa-pen"></i>
+                    </a>
+                    
+                    <a href="#"class="btn btn-outline-danger" onclick="confirmarEliminacion('{{ lugarTemporal.id }}')">
+                        <i class="fa fa-trash"></i>
+                    </a> 
+                    
+                    <script>
+                    function confirmarEliminacion(id) {
+                        Swal.fire({
+                        title: '¿Estás seguro?',
+                        text: '¡Esta acción no se puede deshacer!',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Sí, eliminar',
+                        cancelButtonText: 'Cancelar'
+                        }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = `eliminarLugar/${id}`;
+                        }
+                        });
+                    }
+                    </script>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<div class="text-center">
+    <a href="nuevosLugares" class="btn btn-primary">
+        Agregar Lugar
+    </a>
+</div>
+<br>
+<br>
+{% endblock %}
