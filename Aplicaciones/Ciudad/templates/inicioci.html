@@ -1,5 +1,66 @@
 {% extends 'plantilla.html' %}
 {% load static %}
 {% block body %}
-<h1>HOLA</h1>
+<br>
+<h1 class="text-center">Listado de ciudades</h1>
+
+<hr>
+<table class="table table-bordered table-striped table-hover ">
+    <thead>
+        <tr class="table-success text-center">
+            <th>ID</th>
+            <th>NOMBRE</th>
+            <th>CLIMA</th>
+            <th>POBLACIÓN</th>
+            <th>FOTO</th>
+            <th>FOLLETOS</th>
+            <th>ACCIONES</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for ciudadTemporal in ciudad %}
+            <tr>
+                <td>{{ciudadTemporal.id}}</td>
+                <td>{{ciudadTemporal.nombre}}</td>
+                <td>{{ciudadTemporal.clima}}</td>
+                <td>{{ciudadTemporal.poblacion}}</td>
+                <td>{{ciudadTemporal.foto}}</td>
+                <td>{{ciudadTemporal.folleto}}</td>
+                <td>
+                    <a href="editarCiudad/{{ciudadTemporal.id}}" class="btn btn-outline-warning">
+                        <i class="fa fa-pen"></i>
+                    </a>
+                    <a href="#" class="btn btn-outline-danger" onclick="confirmarEliminacion('{{ciudadTemporal.id}}')">
+                        <i class="fa fa-trash"></i>
+                    </a>
+                    <script>
+                        function confirmarEliminacion(id) {
+                            Swal.fire({
+                            title: '¿Estás seguro?',
+                            text: '¡Esta acción no se puede deshacer!',
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Sí, eliminar',
+                            cancelButtonText: 'Cancelar'
+                            }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = `eliminarCiudad/${id}`;
+                            }
+                            });
+                        }
+                        </script>  
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<div class="text-center">
+    <a href="nuevoCiudad" class="btn btn-primary " >
+        Agregar Ciudad
+    </a>
+</div>
+<br>
+<br>
 {% endblock %}
