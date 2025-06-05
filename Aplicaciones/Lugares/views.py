@@ -9,7 +9,7 @@ def inicio(request):
     listadoLugares=Lugares.objects.all()
     return render(request,"iniciolu.html",{'lugar':listadoLugares})
 def nuevoLugar(request):
-    return render(request,"nuevosLugares.html")
+    return render(request,"nuevoLugar.html")
 def guardarLugar(request):
     nombre=request.POST["nombre"]
     direccion=request.POST["direccion"]
@@ -31,9 +31,9 @@ def eliminarLugar(request,id):
 
 def editarLugar(request,id):
     lugarEditar=Lugares.objects.get(id=id)
-    return render(request,"editarLugares.html",{'lugarEditar':lugarEditar})
+    return render(request,"editarLugar.html",{'lugarEditar':lugarEditar})
 
-def procesarEdicionCiudad(request):
+def procesarEdicionLugar(request):
     nombre=request.POST["nombre"]
     direccion=request.POST["direccion"]
     resena=request.POST["resena"]

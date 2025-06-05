@@ -1,0 +1,68 @@
+{% extends 'plantilla.html' %}
+{% load static %}
+{% block body %}
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 bg-light">
+        <h1>Nuevo Lugar</h1>
+        <form action="guardarLugar" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <label for="nombre">Nombre(*)</label><br>
+            <input class="form-control" type="text" name="nombre" id="nombre" required><br>
+
+            <label for="direccion">Direccion(*)</label><br>
+            <input class="form-control" type="text" name="direccion" id="direccion" required><br>
+            
+            <label for="resena">Reseña: deje su comentario(*)</label><br>
+            <textarea class="form-control" name="resena" id="resena" rows="5"></textarea><br>
+
+            <label for="">Horario</label>
+            <input type="file" name="horario" id="horario" class="form-control">
+
+            <br>
+            <label for="">Historia(PDF)*</label>
+            <input class="form-control" type="file" name="historia" id="historia" >
+            <br>
+
+            <label for="">Horario</label>
+            <br>
+            <input type="file" name="horario" id="horario" class="form-control">
+            {% if lugarEditar.horario %}
+                <br>
+                <img src="{{ cargoEditar.horario.url }}" alt="Imagen actual" width="120">
+            {% endif %}
+            <br>
+            <br>
+            <label for="">Historia(PDF)*</label>
+            <br>
+            <input type="file" name="historia" id="historia" class="form-control">
+            {% if lugarEditar.historia %}
+                <br>
+                <iframe 
+                    src="{{ lugarEditar.historia.url }}#page=1" 
+                    width="300" 
+                    height="200"
+                    style="border: 1px solid #ddd; background: #f8f9fa;"
+                    title="Vista previa del documento"
+                    type="application/pdf">
+                </iframe>
+            {% endif %}
+            <br>
+
+            <button class="btn btn-success" type="submit">Guardar</button>
+            <a class="btn btn-outline-danger" href="{% url 'iniciolu' %}">Cancelar</a><br><br>
+        </form>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+<script>
+    $("#horario").fileinput({
+            //language: "es",
+            allowedFileExtensions: ["png|jpg|jpeg"],
+            showCaption: false,
+            dropZoneEnabled: true,
+            showClose: false
+    });
+</script>
+{% endblock %}
