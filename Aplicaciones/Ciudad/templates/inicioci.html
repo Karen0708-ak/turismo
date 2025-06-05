@@ -12,6 +12,7 @@
             <th>NOMBRE</th>
             <th>CLIMA</th>
             <th>POBLACIÓN</th>
+            <th>LUGARES TURÍSTICOS</th>
             <th>FOTO</th>
             <th>FOLLETOS</th>
             <th>ACCIONES</th>
@@ -24,6 +25,13 @@
                 <td>{{ciudadTemporal.nombre}}</td>
                 <td>{{ciudadTemporal.clima}}</td>
                 <td>{{ciudadTemporal.poblacion}}</td>
+                <td>
+                    {% for lugar in ciudadTemporal.lugares.all %}
+                        {{ lugares.nombre }}{% if not forloop.last %}, {% endif %}
+                    {% empty %}
+                        No hay ciudad
+                    {% endfor %}
+                </td>
                 <td>
                     {% if ciudadTemporal.foto %}
                         <img src="{{ciudadTemporal.foto.url}}" alt="" height="80px">

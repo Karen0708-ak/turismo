@@ -22,8 +22,8 @@ def guardarCiudad(request):
     
 
     nuevaCiudad=Ciudad.objects.create(nombre=nombre,clima=clima,poblacion=poblacion,foto=foto,folleto=folleto)
-    for lugar_id in lugares_ids:
-            lugares = Lugares.objects.get(id=lugar_id)
+    for id in lugares_ids:
+            lugares = Lugares.objects.get(id=id)
             nuevaCiudad.lugares.add(lugares)
     #mensaje de confirmacion
     messages.success(request,"Ciudad guardada exitosamente")

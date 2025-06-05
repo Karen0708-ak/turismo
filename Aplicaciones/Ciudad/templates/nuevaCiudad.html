@@ -21,6 +21,14 @@
             <label for="poblacion">Población(*)</label><br>
             <input class="form-control" type="number" name="poblacion" id="poblacion" required><br>
 
+            <label for="lugares" >Lugares</label><br>
+            <select name="lugares" id="lugares" multiple>
+                <option value="">Seleccione los lugares</option>
+                {% for e in lugares%}
+                    <option value="{{e.id}}">{{e.nombre}}</option>
+                {% endfor%}
+            </select><br>
+
             <label for="">Foto</label>
             <input type="file" name="foto" id="foto" class="form-control">
 

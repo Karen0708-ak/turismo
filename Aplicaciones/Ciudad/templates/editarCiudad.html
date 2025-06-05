@@ -20,6 +20,17 @@
             <label for="poblacion">Población(*)</label><br>
             <input class="form-control" type="number" name="poblacion" id="poblacion" value="{{ciudadEditar.poblacion}}" ><br>
 
+
+            <label for="lugares" >Lugares</label><br>
+            <select name="lugares" id="lugares" multiple>
+                {% for j in lugares %}
+                    <option value="{{ j.id }}"
+                        {% if j in ciudadEditar.lugares.all %}selected{% endif %}>
+                        {{ j.nombre }}
+                    </option>
+                {% endfor %}
+            </select><br><br>
+
             <label for="">Foto</label>
             <br>
             <input type="file" name="foto" id="foto" class="form-control">
