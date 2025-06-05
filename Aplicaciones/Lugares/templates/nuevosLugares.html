@@ -1,0 +1,43 @@
+{% extends 'plantilla.html' %}
+{% load static %}
+{% block body %}
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 bg-light">
+        <h1>Nueva Ciudad</h1>
+        <form action="guardarLugar" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <label for="nombre">Nombre(*)</label><br>
+            <input class="form-control" type="text" name="nombre" id="nombre" required><br>
+
+            <label for="direccion">Direccion(*)</label><br>
+            <input class="form-control" type="text" name="direccion" id="direccion" required><br>
+            
+            <label for="resena">Reseña: deje su comentario(*)</label><br>
+            <textarea class="form-control" name="resena" id="resena" rows="5"></textarea><br>
+
+            <label for="">Horario</label>
+            <input type="file" name="horario" id="horario" class="form-control">
+
+            <br>
+            <label for="">Historia(PDF)*</label>
+            <input class="form-control" type="file" name="historia" id="historia" >
+            <br>
+
+            <button class="btn btn-success" type="submit">Guardar</button>
+            <a class="btn btn-outline-danger" href="{% url 'iniciolu' %}">Cancelar</a><br><br>
+        </form>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+<script>
+    $("#foto").fileinput({
+            //language: "es",
+            allowedFileExtensions: ["png|jpg|jpeg"],
+            showCaption: false,
+            dropZoneEnabled: true,
+            showClose: false
+    });
+</script>
+{% endblock %}

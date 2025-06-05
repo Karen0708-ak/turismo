@@ -27,6 +27,8 @@ urlpatterns = [
      path('', RedirectView.as_view(url=reverse_lazy('inicioci'), permanent=False)),
     path('admin/', admin.site.urls),
     path('',include('Aplicaciones.Ciudad.urls')),
+    path('',include('Aplicaciones.Lugares.urls')),
+
 ]
 
 if settings.DEBUG:urlpatterns+=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
