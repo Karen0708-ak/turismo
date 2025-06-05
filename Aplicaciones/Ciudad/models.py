@@ -9,5 +9,5 @@ class Ciudad(models.Model):
     nombre = models.CharField(max_length=100)
     clima = models.CharField(max_length=10, choices=CLIMA_CHOICES)
     poblacion = models.IntegerField()
-    foto = models.FileField(upload_to ='ciudades',null=True, blank=True)
-    folleto = models.FileField(upload_to='cuidades',null=True, blank=True)
+    foto = models.FileField(upload_to ='docu',null=True, blank=True)
+    folleto = models.FileField(upload_to='docu',null=True, blank=True)
