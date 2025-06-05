@@ -4,33 +4,26 @@
 <div class="row">
     <div class="col-md-3"></div>
     <div class="col-md-6 bg-light">
-        <h1>Nuevo Lugar</h1>
-        <form action="guardarLugar" method="post" enctype="multipart/form-data">
+        <h1>Editar Lugar</h1>
+        <form action="/procesarEdicionLugar" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            
+            <input type="hidden" name="id" value="{{lugarEditar.id}}">
             <label for="nombre">Nombre(*)</label><br>
-            <input class="form-control" type="text" name="nombre" id="nombre" required><br>
+            <input class="form-control" type="text" name="nombre" id="nombre" value="{{lugarEditar.nombre}}"><br>
 
             <label for="direccion">Direccion(*)</label><br>
-            <input class="form-control" type="text" name="direccion" id="direccion" required><br>
+            <input class="form-control" type="text" name="direccion" id="direccion" value="{{lugarEditar.direccion}}"><br>
             
             <label for="resena">Reseña: deje su comentario(*)</label><br>
-            <textarea class="form-control" name="resena" id="resena" rows="5"></textarea><br>
+            <textarea class="form-control" name="resena" id="resena" rows="5">{{lugarEditar.resena}}</textarea><br>
 
-            <label for="">Horario</label>
-            <input type="file" name="horario" id="horario" class="form-control">
-
-            <br>
-            <label for="">Historia(PDF)*</label>
-            <input class="form-control" type="file" name="historia" id="historia" >
-            <br>
 
             <label for="">Horario</label>
             <br>
             <input type="file" name="horario" id="horario" class="form-control">
             {% if lugarEditar.horario %}
                 <br>
-                <img src="{{ cargoEditar.horario.url }}" alt="Imagen actual" width="120">
+                <img src="{{ lugarEditar.horario.url }}" alt="Imagen actual" width="120">
             {% endif %}
             <br>
             <br>

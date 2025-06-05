@@ -34,11 +34,10 @@ def editarLugar(request,id):
     return render(request,"editarLugar.html",{'lugarEditar':lugarEditar})
 
 def procesarEdicionLugar(request):
+    id = request.POST['id']
     nombre=request.POST["nombre"]
     direccion=request.POST["direccion"]
     resena=request.POST["resena"]
-    horario=request.FILES.get("horario")
-    historia=request.FILES.get("historia")
     #Subiendo archivo
     nhorario=request.FILES.get("horario")
     #Archivo
